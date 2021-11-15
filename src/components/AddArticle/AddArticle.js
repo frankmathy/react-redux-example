@@ -23,7 +23,7 @@ const AddArticle = ({ saveArticle }) => {
         placeholder="Title"
         onChange={handleArticleData}
       />
-      <inout
+      <input
         type="text"
         id="body"
         placeholder="Body"

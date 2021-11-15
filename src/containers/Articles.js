@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import Article from '../components/Article/Article';
 import AddArticle from '../components/AddArticle/AddArticle';
-import { addArticle } from '../store/actionCreators';
+import { simulatedHttpRequest } from '../store/actionCreators';
 
 const Articles = ({ articles, saveArticle }) => (
   <div>
@@ -22,7 +22,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    saveArticle: article => dispatch(addArticle(article))
+    saveArticle: article => dispatch(simulatedHttpRequest(article))
   };
 };
 
