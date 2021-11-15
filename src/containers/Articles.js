@@ -1,25 +1,29 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+
 import Article from '../components/Article/Article';
 import AddArticle from '../components/AddArticle/AddArticle';
+import { addArticle } from '../store/actionCreators';
 
-const Articles = () => {
-  const [articles, setArticles] = useState([
-    { id: 1, title: 'post 1', body: 'Der Artikel Nummer 1' },
-    { id: 2, title: 'post 1', body: 'Der Artikel Nummer 2' }
-  ]);
+const Articles = ({ articles, saveArticle }) => (
+  <div>
+    <AddArticle saveArticle={saveArticle} />
+    {articles.map(article => (
+      <Article key={article.id} article={article} />
+    ))}
+  </div>
+);
 
-  const saveArticle = e => {
-    e.preventDefault();
+const mapStateToProps = state => {
+  return {
+    articles: state.articles
   };
-
-  return (
-    <div>
-      <AddArticle saveArticle={saveArticle} />
-      {articles.map(article => (
-        <Article key={article.id} article={article} />
-      ))}
-    </div>
-  );
 };
 
-export default Articles;
+const mapDispatchToProps = dispatch => {
+  return {
+    saveArticle: article => dispatch(addArticle(article))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Articles);
